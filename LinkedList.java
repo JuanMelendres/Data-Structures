@@ -1,4 +1,4 @@
-public interface LinkList<E> {
+public interface LinkedList<E> {
 
 	public boolean isEmpty(); // Devuelve true si la lista está vacía, false de lo contrario.
 

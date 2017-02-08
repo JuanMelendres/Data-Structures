@@ -3,7 +3,7 @@ public class Node<E>{
     E data;
     Node<E> next;
 
-    public Node (){
+    public Node(){
 		data = null;
 		next = null;
 	}
@@ -13,8 +13,16 @@ public class Node<E>{
         this.next = null;
     }
 
-    public Node(Node<E> n, E data){
+    public Node(E data, Node<E> n){
         this.data = data;
+        this.next = n;
+    }
+
+    public Node<E> getNext(){
+        return this.next;
+    }
+
+    public void setNext(Node<E> n){
         this.next = n;
     }
 
@@ -22,20 +30,12 @@ public class Node<E>{
         return data;
     }
 
-    public Node getNext(){
-        return this.next;
-    }
-
     public void setData(E data){
         this.data = data;
     }
 
-    public void setNext(Node<E> n){
-        this.next = n;
-    }
-
     public String toString(){
-        return this.data + "";
+        return this.data + " ";
     }
 
 }
