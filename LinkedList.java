@@ -10,7 +10,7 @@ public interface LinkedList<E> {
 
 	public int indexOf(E data); //Devuelve el entero que representa la posición de ítem en la lista. Si no existe en la lista devuelve -1.
 
-	public boolean add(int index, E data); //Agrega el ítem a la lista en la posición índex si éste es válido.
+	public void add(int index, E data); //Agrega el ítem a la lista en la posición índex si éste es válido.
 
 	public E remove(int index); //Remueve el elemento que está en la posición índex de la lista, si el índice es válido.
 

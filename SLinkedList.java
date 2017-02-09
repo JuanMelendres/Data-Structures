@@ -12,7 +12,7 @@ public class SLinkedList<E> implements LinkedList<E> {
 		this.size = 0;
 	}
 
-	public SLinkedList(Node<E> firstNode, int size){
+	public SLinkedList(int size, Node<E> firstNode){
 		this.size = size;
 		this.firstNode = firstNode;
 	}
@@ -100,18 +100,34 @@ public class SLinkedList<E> implements LinkedList<E> {
 	public void addLast(E data) {
 	}
 
-	public E remove(int index){
-		if(index==0){
-			return removeFirst();
+	public E remove(int index) throws NullPointerException{
+		Node<E> ant= new Node<E>();
+		Node <E> eliminar=new Node<E>();
+		int i=0;
+		try{
+			if(index==0){
+				this.firstNode=this.firstNode.getNext();
+				this.size--;
+			}
+			else{
+				ant=this.firstNode;
+				while(i<index&&index<=this.size){
+					if(i==index-1){
+						eliminar=ant.getNext();
+						ant.setNext(eliminar.getNext());
+						eliminar.setData(null);
+						eliminar.setNext(null);
+						this.size--;
+					}
+					ant=ant.getNext();
+					i++;
+				}
+			}
 		}
-		else{
-			Node<E> borrar = get(index);
-			Node<E> anterior = get(indexOf(borrar)-1);
-			anterior.setNext(borrar.getNext());
-			borrar.setNext(null);
-			this.size--;
+		catch(NullPointerException e){
+			System.out.println(e);
 		}
-		return borrar;
+		return null;
 	}
 
 	public E removeFirst() {
