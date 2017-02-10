@@ -3,8 +3,7 @@ import java.util.NoSuchElementException;
 
 public class SLinkedList<E> implements LinkedList<E> {
 
-	private Node<E> firstNode;
-
+	private Node<E> firstNode = null;
 	private int size;
 
 	public SLinkedList(){
@@ -18,67 +17,54 @@ public class SLinkedList<E> implements LinkedList<E> {
 	}
 
 	public int size(){
-		return this.size();
+		return this.size;
 	}
 
 	public boolean isEmpty(){
-		if(this.firstNode == null){
+		if(this.size == 0){
 			return true;
 		}
 		else{
 			return false;
 		}
-		//return this.firstNode = null;
 	}
 
 	public void add(int index, E data){
 		if(index < 0 || index > this.size){
-			throw new IndexOutOfBoundsException ("Index out of bounds");
+			throw new IndexOutOfBoundsException ("Index out of bounds!!!!!");
 		}
-		if(index == 0){
+		else if(index == 0){
 			addFirst(data);
 		}
 		else{
 			Node<E> ant;
 			int aux = 0;
 			ant = this.firstNode;
-			while(aux < index - 1){
+			while(aux < index -1){
 				ant = ant.getNext();
 				aux++;
 			}
-			Node<E> nuevo = new Node(data, ant.getNext());
-			ant.setNext(ant.getNext());
-			size++;
+			Node<E> nuevo = new Node<E>(data, ant.getNext());
+			ant.setNext(nuevo);
+			this.size++;
 		}
 	}
 
 	public void addFirst(E data){
-		this.firstNode = new Node(data, this.firstNode);
-		this.size++;
+		this.firstNode = new Node<E>(data, this.firstNode);
+        this.size++;
 	}
 
 	public boolean contains(E data){
-		if(this.size == 0){
-			return false;
-		}
-		else{
-			int a = this.indexOf(data);
-			return a > -1;
-		}
-	}
-
-	public E get(int index){
-		if(index < 0 || index < this.size) {
-			throw new IndexOutOfBoundsException ("Indice no valido");
-		}
-		Node<E> ant;
-		int aux = 0;
-		ant = this.firstNode;
-		while(aux < index){
-			ant = ant.getNext();
-			aux++;
-		}
-		return ant.getData();
+		boolean contains = false;
+        Node<E> temp = this.firstNode;
+        for (int i = 0; i < size; i++) {
+            temp = temp.getNext();
+            if (temp.getData() == data){
+				contains = true;
+			}
+        }
+        return contains;
 	}
 
 	public int indexOf(E data){
@@ -97,29 +83,26 @@ public class SLinkedList<E> implements LinkedList<E> {
 		return -1;
 	}
 
-	public void addLast(E data) {
-	}
-
 	public E remove(int index) throws NullPointerException{
-		Node<E> ant= new Node<E>();
-		Node <E> eliminar=new Node<E>();
-		int i=0;
+		Node<E> ant = new Node<E>();
+		Node <E> eliminar = new Node<E>();
+		int i = 0;
 		try{
-			if(index==0){
-				this.firstNode=this.firstNode.getNext();
+			if(index == 0){
+				this.firstNode = this.firstNode.getNext();
 				this.size--;
 			}
 			else{
-				ant=this.firstNode;
-				while(i<index&&index<=this.size){
-					if(i==index-1){
-						eliminar=ant.getNext();
+				ant = this.firstNode;
+				while(i < index&&index <= this.size){
+					if(i == index-1){
+						eliminar = ant.getNext();
 						ant.setNext(eliminar.getNext());
 						eliminar.setData(null);
 						eliminar.setNext(null);
 						this.size--;
 					}
-					ant=ant.getNext();
+					ant = ant.getNext();
 					i++;
 				}
 			}
@@ -130,12 +113,26 @@ public class SLinkedList<E> implements LinkedList<E> {
 		return null;
 	}
 
-	public E removeFirst() {
+	public E removeFirst() { // falta por terminar
 		return null;
 	}
 
-	public E removeLast() {
+	public E removeLast() { // falta por terminar
 		return null;
+	}
+
+    public E get(int index){
+		if(index < 0 || index > this.size) {
+			throw new IndexOutOfBoundsException ("Indice no valido");
+		}
+		Node<E> ant;
+		int aux = 0;
+		ant = this.firstNode;
+		while(aux < index){
+			ant = ant.getNext();
+			aux++;
+		}
+		return ant.getData();
 	}
 
 	public E getFirst(){
@@ -147,8 +144,15 @@ public class SLinkedList<E> implements LinkedList<E> {
 		}
 	}
 
-	public E getLast() {
-		return null;
+	public E getLast() { // falta por terminar
+		if(this.firstNode == null){
+			throw new NoSuchElementException("No Such Element");
+		}
+		Node<E> tmp = this.firstNode;
+      	while(tmp.getNext() != null){
+			tmp = tmp.getNext();
+		}
+		return tmp.getData();
 	}
 
 	public String toString(){
@@ -160,7 +164,7 @@ public class SLinkedList<E> implements LinkedList<E> {
 			Node<E> actual = this.firstNode;
 			for(int i = 0; i < this.size; i++) {
 				sb.append("[" + actual.getData() + "]");
-				actual.getNext();
+				actual = actual.getNext();
 			}
 			return sb.toString();
 		}

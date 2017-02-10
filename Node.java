@@ -1,21 +1,23 @@
 public class Node<E>{
 
-    E data;
-    Node<E> next;
+    private E data;
+    private Node<E> next;
 
     public Node(){
-		data = null;
-		next = null;
+        this(null,null);
 	}
 
     public Node(E data){
-        this.data = data;
-        this.next = null;
+        this(data, null);
     }
 
     public Node(E data, Node<E> n){
         this.data = data;
         this.next = n;
+    }
+
+    public E getData(){
+        return data;
     }
 
     public Node<E> getNext(){
@@ -26,16 +28,7 @@ public class Node<E>{
         this.next = n;
     }
 
-    public E getData(){
-        return data;
-    }
-
     public void setData(E data){
         this.data = data;
     }
-
-    public String toString(){
-        return this.data + " ";
-    }
-
 }
