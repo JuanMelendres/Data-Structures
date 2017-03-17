@@ -18,17 +18,17 @@ public class Heap<E extends Comparable<E>> {
     /**
     * Método que hace un swap entre los elementos (solo los acomoda)
     */
-    private void siftUp() {
+    private void swapUp() {
         int d = this.arrG.size() - 1;
         while (d > 0) {
             int p = (d-1)/2;
             E data = this.arrG.get(d);
-            E parent = this.arrG.get(p);
-            if (item.compareTo(parent) > 0) {
+            E padre = this.arrG.get(p);
+            if (data.compareTo(padre) > 0) {
                 // swap
-                this.arrG.set(d, parent);
+                this.arrG.set(d, padre);
                 this.arrG.set(p, data);
-                // move up one level
+                // movemos un nivel
                 d = p;
             } else {
                 break;
@@ -38,13 +38,13 @@ public class Heap<E extends Comparable<E>> {
     /**
     * Método que hace un swap al elemento mas grande (Acomoda de mayor a menor)
     */
-    private void siftDown() {
+    private void swapDown() {
         int a = 0;
         int l = 2*a+1;
         while (l < this.arrG.size()) {
             int max = l,
                 r = l+1;
-            if (r < this.arrG.size()) { // there is a right child
+            if (r < this.arrG.size()) { // checamos al hijo derecho
                 if (this.arrG.get(r).compareTo(this.arrG.get(l)) > 0) {
                     max++;
                 }
@@ -55,7 +55,7 @@ public class Heap<E extends Comparable<E>> {
                     this.arrG.set(a, this.arrG.get(max));
                     this.arrG.set(max, temp);
                     a = max;
-                    l = 2*k+1;
+                    l = 2*a+1;
             } else {
                 break;
             }
@@ -67,7 +67,7 @@ public class Heap<E extends Comparable<E>> {
     */
     public void insert(E data) {
         this.arrG.add(data);
-        siftUp();
+        swapUp();
     }
     /**
     * Método que elimina un elemento del ArrayList
@@ -83,7 +83,7 @@ public class Heap<E extends Comparable<E>> {
         }
         E data = this.arrG.get(0);
         this.arrG.set(0, this.arrG.remove(this.arrG.size()-1));
-        siftDown();
+        swapDown();
         return data;
     }
     /**
